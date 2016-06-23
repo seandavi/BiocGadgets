@@ -1,0 +1,127 @@
+---
+title: 'Bioconductor Developer Day, 2016: Shiny Gadgets and Interactive Base Graphics'
+author: "Sean Davis"
+date: "June 24, 2016"
+output: revealjs::revealjs_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Shiny
+
+- interactively communicating _ideas_ and _results_
+    - plots
+    - data
+    - model fitting
+- for full application development
+    - interact with data sources
+    - collect and react to input
+    - ...
+
+---
+  
+## Gadgets vs Apps
+
+- Gadgets are interactive tools that enhance the developer analyst experience
+- Apps represent the _output_ of an analsys, Gadgets are for using during an analysis
+- The audience for an App is the *end user*, while the audience for a Gadget is an *R user*
+- Gadget fundamentals are shiny, but design is focused
+    - on limited screen space
+    - on useful functionality *during* analysis
+    - performing a function or returning results
+- Apps run on Shiny Server, while Gadgets are intended to be invoked in code
+
+---
+
+## Gadgets
+
+Shiny Gadgets could be created for most any task you might do during data loading, cleaning, manipulation, and visualization.
+
+- A tool to preview regular expressions for find/replace (sub and gsub)
+- Visual selection tools for subsetting or outlier exclusion
+- An easy-to-use UI for downloading data from a complicated API and turning it into a data frame
+- ...
+
+---
+
+## Gadget structure
+
+```{r gadgetSkeleton,eval=FALSE}
+library(shiny)
+library(miniUI)
+
+myGadgetFunc <- function(inputValue1, inputValue2) {
+  ui <- miniPage(
+    ## Define layout, inputs, outputs, etc.
+  )
+  
+  server <- function(input, output, session) {
+    # Define reactive expressions, outputs, etc.
+    # And then 
+    stopApp(returnValue)
+  }
+  runGadget(ui, server)
+}
+```
+  
+## Gadget UI block
+  
+```{r miniUI,eval=FALSE}
+  ui <- miniPage(
+    gadgetTitleBar("My Gadget"),
+    miniContentPanel(
+      # Define layout, inputs, outputs
+    )
+  )
+```
+
+---
+
+## Gadget Server block
+
+```{r miniUI2,eval=FALSE}
+  server <- function(input, output, session) {
+    # Define reactive expressions, outputs, etc.
+
+    # When the Done button is clicked, return a value
+    observeEvent(input$done, {
+      returnValue <- ...
+      stopApp(returnValue)
+    })
+  }
+```
+
+## Simple sub example
+
+```{r regex1,eval=FALSE}
+regexTest = function(pattern="night", 
+                     x = "We can turn day into night with this Gadget",
+                     replace = "day") {
+  
+  ui = miniPage(
+    gadgetTitleBar("Basic gsub tester"),
+    miniContentPanel(
+      textInput("text","Text:", x),
+      textInput('pattern','Pattern to replace:', pattern),
+      textInput("replacement","Text to substitute", replace),
+      textOutput("out")
+    )
+  )
+  
+  server = function(input, output, session) {
+    output$out = renderText( gsub(pattern = input$pattern,
+                                 replace = input$replacement, 
+                                 x = input$text) )
+    observeEvent(input$done, {
+      returnValue <- input$pattern
+      stopApp(returnValue)
+    })
+  }
+  runGadget(ui, server)
+}
+```
+
+```{r brushPoints,eval=FALSE}
+```
