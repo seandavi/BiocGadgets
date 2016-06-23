@@ -1,7 +1,7 @@
 ---
 title: 'Bioconductor Developer Day, 2016: Shiny Gadgets and Interactive Base Graphics'
 author: "Sean Davis"
-date: "June 24, 2016"
+date: "`r Sys.Date()`"
 output: revealjs::revealjs_presentation
 vignette: >
   %\VignetteIndexEntry{Overview of Shiny Gadgets}
@@ -97,7 +97,7 @@ myGadgetFunc <- function(inputValue1, inputValue2) {
   }
 ```
 
-## Simple sub example
+## regex test example
 
 ```{r regex1,eval=FALSE}
 regexTest = function(pattern="night", 
@@ -126,6 +126,10 @@ regexTest = function(pattern="night",
   runGadget(ui, server)
 }
 ```
+
+---
+
+## ggbrush example
 
 ```{r brushPoints,eval=FALSE}
 ggbrush <- function(dframe, xvar, yvar, viewer=paneViewer()) {

@@ -1,6 +1,6 @@
 Package: BiocGadgets
 Title: Shiny Gadgets for Bioconductor
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Sean", "Davis", email = "seandavi@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 Depends:
@@ -9,4 +9,5 @@ Imports: miniUI, shiny
 License: MIT
 Encoding: UTF-8
 LazyData: true
+VignetteBuilder: knitr
 RoxygenNote: 5.0.1
