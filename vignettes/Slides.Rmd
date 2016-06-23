@@ -3,6 +3,10 @@ title: 'Bioconductor Developer Day, 2016: Shiny Gadgets and Interactive Base Gra
 author: "Sean Davis"
 date: "June 24, 2016"
 output: revealjs::revealjs_presentation
+vignette: >
+  %\VignetteIndexEntry{Overview of Shiny Gadgets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -124,4 +128,32 @@ regexTest = function(pattern="night",
 ```
 
 ```{r brushPoints,eval=FALSE}
+ggbrush <- function(dframe, xvar, yvar, viewer=paneViewer()) {
+  
+  ui <- miniPage(
+    gadgetTitleBar("Drag to select points"),
+    miniContentPanel(
+      # The brush="brush" argument means we can listen for
+      # brush events on the plot using input$brush.
+      plotOutput("plot", height = "100%", brush = "brush")
+    )
+  )
+  
+  server <- function(input, output, session) {
+    
+    # Render the plot
+    output$plot <- renderPlot({
+      # Plot the data with x/y vars indicated by the caller.
+      ggplot(dframe, aes_string(xvar, yvar)) + geom_point()
+    })
+    
+    # Handle the Done button being pressed.
+    observeEvent(input$done, {
+      # Return the brushed points. See ?shiny::brushedPoints.
+      stopApp(brushedPoints(dframe, input$brush))
+    })
+  }
+
+  runGadget(ui, server)
+}
 ```
