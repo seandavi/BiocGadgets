@@ -164,6 +164,43 @@ ggbrush <- function(dframe, xvar, yvar, viewer=paneViewer()) {
 
 ---
 
+## Wrapping shiny
+
+```{r shinyWrap,eval=FALSE}
+shinyFunction = function() {
+  require(shiny)
+  server <- function(input, output) {
+    output$distPlot <- renderPlot({
+      hist(rnorm(input$obs), col = 'darkgray', border = 'white')
+    })
+  }
+  
+  ui <- fluidPage(
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
+      ),
+      mainPanel(plotOutput("distPlot"))
+    )
+  )
+  
+  shinyApp(ui = ui, server = server)
+}
+```
+
+---
+
+## Complex Shiny Wrap
+
+```{r shinyWrapDir,eval=FALSE}
+shinyFunction = function() {
+  runApp(system.file("MyPackage","shinyAppDir"))
+}
+```
+
+
+---
+
 ## Further reading
 
 - http://shiny.rstudio.com/articles/gadget-ui.html
