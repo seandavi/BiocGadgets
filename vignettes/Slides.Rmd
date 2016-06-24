@@ -161,3 +161,12 @@ ggbrush <- function(dframe, xvar, yvar, viewer=paneViewer()) {
   runGadget(ui, server)
 }
 ```
+
+---
+
+## Further reading
+
+- http://shiny.rstudio.com/articles/gadget-ui.html
+- http://shiny.rstudio.com/articles/plot-interaction.html
+- https://github.com/rstudio/miniui
+

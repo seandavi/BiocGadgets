@@ -1,11 +1,11 @@
 Package: BiocGadgets
 Title: Shiny Gadgets for Bioconductor
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: person("Sean", "Davis", email = "seandavi@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: This is just a home for examples of using Shiny Gadgets. 
 Depends:
     R (>= 3.3.0)
-Imports: miniUI, shiny
+Imports: miniUI, shiny, ggplot2
 License: MIT
 Encoding: UTF-8
 LazyData: true

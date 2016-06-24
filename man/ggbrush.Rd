@@ -34,7 +34,6 @@ This function uses the miniUI package to
     to \code{\link{stopApp}}.
 }
 \examples{
-
 data(mtcars)
 ggbrush(mtcars,"disp","hp")
 
