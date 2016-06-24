@@ -1,4 +1,9 @@
 #' A Gadget for testing gsub regular expressions.
+#' 
+#' Supply a regex pattern, a string where matches
+#' are sought, and a replacement. This gadget allows
+#' regex testing. When the correct regex is found,
+#' clicking "Done" will return the current regex.
 #'
 #' @param pattern The regular expression to match.
 #'
