@@ -169,4 +169,5 @@ ggbrush <- function(dframe, xvar, yvar, viewer=paneViewer()) {
 - http://shiny.rstudio.com/articles/gadget-ui.html
 - http://shiny.rstudio.com/articles/plot-interaction.html
 - https://github.com/rstudio/miniui
+- https://github.com/seandavi/BiocGadgets
 
